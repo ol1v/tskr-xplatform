@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using SQLite;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -19,7 +19,15 @@ namespace Taskerino
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            DisplayAlert("Success!", "You did it", "Cancel");
+            Task task = new Task()
+            {
+                Title = titleEntry.Text,
+                Description = descriptionEntry.Text
+            };
+            
+            SQLite.SQLiteConnection conn = new SQLiteConnection((App.DB_PATH));
+            
+            // DisplayAlert("Success!", "You did it", "Cancel")
         }
     }
 }

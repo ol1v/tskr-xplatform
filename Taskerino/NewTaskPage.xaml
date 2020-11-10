@@ -5,8 +5,8 @@
              x:Class="Taskerino.NewTaskPage">
     
         <StackLayout Margin="10,10,10,0">
-            <Entry Placeholder="Task Title.."/>
-            <Entry Placeholder="Task Description.."/>
+            <Entry x:Name="titleEntry" Placeholder="Task Title.."/>
+            <Entry x:Name="descriptionEntry" Placeholder="Task Description.."/>
             <Button Text="Create" 
                     Clicked="Button_Clicked"/>
         </StackLayout>
