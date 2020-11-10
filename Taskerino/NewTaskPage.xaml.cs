@@ -25,9 +25,17 @@ namespace Taskerino
                 Description = descriptionEntry.Text
             };
             
-            SQLite.SQLiteConnection conn = new SQLiteConnection((App.DB_PATH));
+            // using automatically disposes the db connection.
+            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DB_PATH)) {
+            conn.CreateTable<Task>();
+            var numberOfRows = conn.Insert(task);
+
+            if (numberOfRows > 0)
+                DisplayAlert("Success!", "Task has been created", "OK");
+            else
+                DisplayAlert("Failure!", "Something went wrong. Try again!", "OK");
+            }
             
-            // DisplayAlert("Success!", "You did it", "Cancel")
         }
     }
 }
