@@ -9,5 +9,14 @@
                      Clicked="MenuItem_OnClicked"/>            
     </ContentPage.ToolbarItems>
     
+    <ListView x:Name="tasksListView">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <TextCell Text="{ Binding Title }"
+                          Detail="{ Binding Description}"/>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+    
 
 </ContentPage>
