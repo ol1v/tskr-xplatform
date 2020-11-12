@@ -2,6 +2,7 @@ using System;
 using SQLite;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Taskerino.ViewModel;
 
 
 namespace Taskerino.View
@@ -14,7 +15,7 @@ namespace Taskerino.View
             InitializeComponent();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
             Task task = new Task()
             {
@@ -27,10 +28,13 @@ namespace Taskerino.View
                 conn.CreateTable<Task>();
                 var numberOfRows = conn.Insert(task);
 
-            if (numberOfRows > 0)
-                DisplayAlert("Success!", "Task has been created", "OK");
-            else
-                DisplayAlert("Failure!", "Something went wrong. Try again!", "OK");
+                if (numberOfRows > 0)
+                {   
+                    await DisplayAlert("Success!", "Task has been created", "OK");
+                    await NewTaskViewModel.ReadTask();
+                }
+                else
+                    await DisplayAlert("Failure!", "Something went wrong. Try again!", "OK");
             }
             
         }

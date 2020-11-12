@@ -1,4 +1,5 @@
-﻿using Taskerino.View;
+﻿using System.Net.Mime;
+using Taskerino.View;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
