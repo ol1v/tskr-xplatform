@@ -9,6 +9,12 @@ namespace Taskerino.View
         public MainPage()
         {
             InitializeComponent();
+            
+            if (Device.RuntimePlatform == Device.Android)
+                BackgroundColor = Color.BlanchedAlmond;
+            else if (Device.RuntimePlatform == Device.iOS)
+                BackgroundColor = Color.Bisque;
+                
         }
 
         protected override void OnAppearing()
