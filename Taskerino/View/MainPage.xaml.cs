@@ -1,14 +1,20 @@
 ﻿using System;
 using SQLite;
+using Taskerino.Model;
+using Taskerino.ViewModel;
 using Xamarin.Forms;
 
 namespace Taskerino.View
 {
     public partial class MainPage : ContentPage
     {
+    
+        private NewTaskViewModel _viewModel;
         public MainPage()
         {
             InitializeComponent();
+            
+            _viewModel = new NewTaskViewModel();
             
             if (Device.RuntimePlatform == Device.Android)
                 BackgroundColor = Color.BlanchedAlmond;
@@ -20,14 +26,7 @@ namespace Taskerino.View
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
-            {
-                conn.CreateTable<Task>();
-
-                var tasks = conn.Table<Task>().ToList();
-                tasksListView.ItemsSource = tasks;
-            }
+            tasksListView.ItemsSource = _viewModel.GetTodos();
         }
 
         private void MenuItem_OnClicked(object sender, EventArgs e)

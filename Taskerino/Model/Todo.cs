@@ -2,7 +2,7 @@ using SQLite;
 
 namespace Taskerino
 {
-    public class Task
+    public class Todo
     {
         [PrimaryKey, AutoIncrement]
         

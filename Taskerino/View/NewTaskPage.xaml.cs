@@ -10,33 +10,20 @@ namespace Taskerino.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NewTaskPage : ContentPage
     {
+        private NewTaskViewModel _newTaskViewModel;
         public NewTaskPage()
         {
             InitializeComponent();
+            _newTaskViewModel = new NewTaskViewModel();
+            // BindingContext = _newTaskViewModel;
         }
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            Task task = new Task()
-            {
-                Title = titleEntry.Text,
-                Description = descriptionEntry.Text
-            };
-            
-            // using automatically disposes the db connection.
-            using (SQLite.SQLiteConnection conn = new SQLiteConnection(App.DB_PATH)) {
-                conn.CreateTable<Task>();
-                var numberOfRows = conn.Insert(task);
-
-                if (numberOfRows > 0)
-                {   
-                    await DisplayAlert("Success!", "Task has been created", "OK");
-                    await NewTaskViewModel.ReadTask();
-                }
-                else
-                    await DisplayAlert("Failure!", "Something went wrong. Try again!", "OK");
-            }
-            
+            // Add new task
+            var Title = titleEntry.Text;
+            var Description = descriptionEntry.Text;
+            _newTaskViewModel.AddTodo(Title, Description);
         }
     }
 }
